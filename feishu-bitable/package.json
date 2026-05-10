@@ -1,0 +1,16 @@
+{
+  "name": "honest-feishu-bitable",
+  "version": "1.0.0",
+  "description": "宏斯特机电 - 飞书多维表格自动化系统",
+  "type": "module",
+  "scripts": {
+    "init": "node init-tables.js",
+    "seed": "node seed-data.js",
+    "transfer": "node transfer-opportunity.js",
+    "start": "node init-tables.js && node seed-data.js"
+  },
+  "dependencies": {
+    "cc-connect": "^1.3.2",
+    "xlsx": "^0.18.5"
+  }
+}

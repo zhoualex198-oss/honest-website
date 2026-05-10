@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>苏州工业园区宏斯特机电有限公司 | HONEST M&E</title>
+<style>
+/* ===== CSS Variables & Reset ===== */
+:root {
+  --primary: #157FFF;
+  --primary-dark: #0B57C3;
+  --primary-light: #00B0F0;
+  --accent: #ED7D31;
+  --accent-gold: #FFC000;
+  --dark: #0B1628;
+  --dark-2: #121E34;
+  --text: #2C3E50;
+  --text-light: #7F8C9B;
+  --bg: #F5F7FA;
+  --white: #FFFFFF;
+  --gradient-main: linear-gradient(135deg, #0B57C3 0%, #157FFF 50%, #00B0F0 100%);
+  --gradient-accent: linear-gradient(135deg, #ED7D31 0%, #FFC000 100%);
+  --shadow: 0 10px 40px rgba(21, 127, 255, 0.15);
+  --shadow-sm: 0 4px 20px rgba(0,0,0,0.06);
+  --radius: 16px;
+  --radius-sm: 8px;
+  --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ===== Navigation ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 40px; height: 70px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: var(--transition);
+  background: transparent;
+}
+nav.scrolled {
+  background: rgba(11, 22, 40, 0.95);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 2px 30px rgba(0,0,0,0.3);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+}
+.nav-logo img { height: 36px; width: auto; }
+.nav-logo span {
+  font-size: 16px; font-weight: 700; color: var(--white);
+  letter-spacing: 1px;
+}
+.nav-links { display: flex; gap: 8px; list-style: none; align-items: center; }
+.nav-links a {
+  padding: 8px 18px; border-radius: 6px;
+  font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.8);
+  transition: var(--transition); position: relative;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--white); background: rgba(255,255,255,0.1); }
+.nav-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; padding: 5px; }
+.nav-toggle span {
+  width: 26px; height: 2px; background: var(--white);
+  border-radius: 2px; transition: var(--transition);
+}
+
+/* ===== Hero Section ===== */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--dark);
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: var(--gradient-main);
+  opacity: 0.85;
+}
+.hero-particles {
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 40% 70%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(2px 2px at 60% 20%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 80% 60%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 50% 50%, rgba(255,255,255,0.15), transparent),
+    radial-gradient(1px 1px at 70% 90%, rgba(255,255,255,0.25), transparent),
+    radial-gradient(1px 1px at 90% 10%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 30% 50%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 65% 40%, rgba(255,255,255,0.15), transparent);
+  background-size: 200% 200%;
+  animation: particleFloat 20s ease-in-out infinite;
+}
+@keyframes particleFloat {
+  0%, 100% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(11,22,40,0.4) 70%, var(--dark) 100%);
+}
+.hero-circuit {
+  position: absolute; inset: 0;
+  opacity: 0.06;
+  background-image:
+    /* Grid lines for circuit board effect */
+    linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-content { position: relative; z-index: 2; text-align: center; padding: 20px; }
+.hero-badge {
+  display: inline-block; padding: 8px 24px; border-radius: 50px;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.8); font-size: 13px; font-weight: 500;
+  letter-spacing: 2px; margin-bottom: 30px;
+  backdrop-filter: blur(10px);
+  animation: fadeInUp 0.8s ease-out;
+}
+.hero-title {
+  font-size: clamp(36px, 6vw, 72px); font-weight: 800;
+  color: var(--white); line-height: 1.2; margin-bottom: 8px;
+  letter-spacing: -0.5px;
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+.hero-title-en {
+  font-size: clamp(16px, 2.5vw, 32px); font-weight: 300;
+  color: rgba(255,255,255,0.7); letter-spacing: 4px;
+  margin-bottom: 30px;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+.hero-sub {
+  font-size: clamp(16px, 1.5vw, 20px); font-weight: 400;
+  color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto 40px;
+  line-height: 1.8;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+.hero-stats { display: flex; justify-content: center; gap: 60px; margin-top: 50px; flex-wrap: wrap; }
+.hero-stat { text-align: center; animation: fadeInUp 0.8s ease-out 0.4s both; }
+.hero-stat:nth-child(2) { animation-delay: 0.5s; }
+.hero-stat:nth-child(3) { animation-delay: 0.6s; }
+.hero-stat-num {
+  font-size: clamp(28px, 3vw, 42px); font-weight: 800;
+  color: var(--white); line-height: 1;
+}
+.hero-stat-label {
+  font-size: 13px; color: rgba(255,255,255,0.6);
+  margin-top: 8px; letter-spacing: 1px;
+}
+.scroll-indicator {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: rgba(255,255,255,0.5); font-size: 12px; letter-spacing: 2px;
+  animation: bounce 2s infinite;
+}
+.scroll-indicator .arrow { width: 20px; height: 20px; border-right: 2px solid rgba(255,255,255,0.5); border-bottom: 2px solid rgba(255,255,255,0.5); transform: rotate(45deg); }
+@keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes counterUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ===== Section Common ===== */
+.section { padding: 100px 0; position: relative; }
+.section-header { text-align: center; margin-bottom: 60px; }
+.section-tag {
+  display: inline-block; padding: 6px 20px; border-radius: 50px;
+  background: rgba(21, 127, 255, 0.1); color: var(--primary);
+  font-size: 13px; font-weight: 600; letter-spacing: 2px; margin-bottom: 16px;
+}
+.section-title {
+  font-size: clamp(28px, 3.5vw, 40px); font-weight: 800; color: var(--dark);
+  line-height: 1.3; margin-bottom: 16px;
+}
+.section-desc {
+  font-size: 16px; color: var(--text-light);
+  max-width: 600px; margin: 0 auto; line-height: 1.8;
+}
+.section.white-bg { background: var(--white); }
+.section.dark-bg { background: var(--dark); }
+.section.dark-bg .section-title { color: var(--white); }
+.section.dark-bg .section-desc { color: rgba(255,255,255,0.6); }
+.section.dark-bg .section-tag { background: rgba(255,255,255,0.1); color: var(--primary-light); }
+
+/* ===== About Section ===== */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.about-text h3 {
+  font-size: 24px; font-weight: 700; color: var(--dark); margin-bottom: 20px;
+}
+.about-text p {
+  font-size: 15px; color: var(--text-light); line-height: 1.9; margin-bottom: 16px;
+}
+.about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; }
+.about-feature {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px; border-radius: var(--radius-sm);
+  background: var(--bg); font-size: 14px; font-weight: 600; color: var(--text);
+}
+.about-feature .icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--gradient-main); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.about-feature .icon svg { width: 18px; height: 18px; fill: var(--white); }
+.about-image {
+  position: relative; border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.about-image img { width: 100%; height: 400px; object-fit: cover; }
+
+/* ===== Timeline ===== */
+.timeline { position: relative; padding: 20px 0; }
+.timeline::before {
+  content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+  top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(180deg, var(--primary), var(--primary-light), transparent);
+}
+.timeline-item {
+  display: flex; align-items: flex-start; margin-bottom: 40px;
+  position: relative;
+}
+.timeline-item:nth-child(odd) { flex-direction: row-reverse; }
+.timeline-item .timeline-content {
+  width: calc(50% - 40px); padding: 24px 28px;
+  background: var(--white); border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm); transition: var(--transition);
+}
+.timeline-item .timeline-content:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.timeline-item .timeline-year {
+  font-size: 14px; font-weight: 800; color: var(--primary);
+  margin-bottom: 6px; letter-spacing: 1px;
+}
+.timeline-item .timeline-text { font-size: 14px; color: var(--text-light); line-height: 1.6; }
+.timeline-dot {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--primary); border: 4px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--primary);
+  top: 28px; z-index: 1;
+}
+
+/* ===== Core Business (Industry Sectors) ===== */
+.sectors-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+.sector-card {
+  position: relative; border-radius: var(--radius); overflow: hidden;
+  background: var(--white); box-shadow: var(--shadow-sm);
+  cursor: pointer; transition: var(--transition);
+  padding: 40px 28px 32px; text-align: center;
+  border: 1px solid transparent;
+}
+.sector-card:hover { transform: translateY(-8px); box-shadow: var(--shadow); border-color: var(--primary); }
+.sector-card .sector-icon {
+  width: 72px; height: 72px; margin: 0 auto 20px;
+  border-radius: 20px; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, rgba(21,127,255,0.08), rgba(0,176,240,0.12));
+  transition: var(--transition);
+}
+.sector-card:hover .sector-icon { background: var(--gradient-main); }
+.sector-card .sector-icon svg { width: 36px; height: 36px; fill: var(--primary); transition: var(--transition); }
+.sector-card:hover .sector-icon svg { fill: var(--white); }
+.sector-card h4 { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+.sector-card p { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+.sector-card .sector-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 16px; font-size: 13px; font-weight: 600; color: var(--primary);
+  opacity: 0; transform: translateY(6px); transition: var(--transition);
+}
+.sector-card:hover .sector-link { opacity: 1; transform: translateY(0); }
+.sector-card .sector-link::after {
+  content: '→'; transition: var(--transition);
+}
+.sector-card:hover .sector-link::after { transform: translateX(4px); }
+
+/* ===== Team Section ===== */
+.team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.team-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.team-stat-card {
+  padding: 24px; border-radius: var(--radius-sm);
+  background: var(--bg); text-align: center; transition: var(--transition);
+}
+.team-stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-sm); }
+.team-stat-card .num {
+  font-size: 28px; font-weight: 800; color: var(--primary);
+  line-height: 1;
+}
+.team-stat-card .label {
+  font-size: 13px; color: var(--text-light); margin-top: 6px;
+}
+.team-values { display: flex; flex-direction: column; gap: 20px; }
+.team-value {
+  padding: 20px 24px; border-radius: var(--radius-sm);
+  background: var(--white); border-left: 4px solid var(--primary);
+  box-shadow: var(--shadow-sm); transition: var(--transition);
+}
+.team-value:hover { transform: translateX(6px); }
+.team-value h5 { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+.team-value p { font-size: 13px; color: var(--text-light); }
+
+/* ===== Certifications ===== */
+.cert-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+.cert-card {
+  padding: 32px 24px; border-radius: var(--radius);
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  text-align: center; transition: var(--transition);
+}
+.cert-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-4px); }
+.cert-card .cert-icon {
+  width: 56px; height: 56px; margin: 0 auto 16px;
+  border-radius: 50%; background: var(--gradient-main);
+  display: flex; align-items: center; justify-content: center;
+}
+.cert-card .cert-icon svg { width: 28px; height: 28px; fill: var(--white); }
+.cert-card h5 { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.cert-card p { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+/* ===== Equipment Section ===== */
+.equip-intro {
+  text-align: center; margin-bottom: 40px;
+}
+.equip-intro p { font-size: 15px; color: var(--text-light); max-width: 700px; margin: 0 auto; line-height: 1.8; }
+.equip-table-wrap {
+  overflow-x: auto; border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+.equip-table {
+  width: 100%; border-collapse: collapse; min-width: 700px;
+  background: var(--white); font-size: 14px;
+}
+.equip-table thead { background: var(--gradient-main); color: var(--white); }
+.equip-table th {
+  padding: 16px 20px; text-align: left; font-weight: 600;
+  font-size: 13px; letter-spacing: 0.5px;
+}
+.equip-table td { padding: 14px 20px; border-bottom: 1px solid #eee; color: var(--text); }
+.equip-table tbody tr:hover { background: rgba(21,127,255,0.04); }
+.equip-table tbody tr:last-child td { border-bottom: none; }
+
+/* ===== Cases ===== */
+.cases-nav {
+  display: flex; justify-content: center; gap: 12px; margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+.cases-nav-btn {
+  padding: 10px 24px; border-radius: 50px; border: 1px solid #e0e4e8;
+  background: var(--white); font-size: 14px; font-weight: 600;
+  color: var(--text); cursor: pointer; transition: var(--transition);
+}
+.cases-nav-btn:hover { border-color: var(--primary); color: var(--primary); }
+.cases-nav-btn.active { background: var(--gradient-main); color: var(--white); border-color: transparent; }
+.case-category { display: none; }
+.case-category.active { display: block; animation: fadeInUp 0.5s ease-out; }
+.case-card {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  padding: 36px; border-radius: var(--radius);
+  background: var(--white); box-shadow: var(--shadow-sm);
+  margin-bottom: 24px; transition: var(--transition);
+}
+.case-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.case-card h3 {
+  font-size: 20px; font-weight: 700; color: var(--dark);
+  margin-bottom: 12px;
+}
+.case-card .case-label {
+  display: inline-block; padding: 4px 12px; border-radius: 4px;
+  background: rgba(21,127,255,0.08); color: var(--primary);
+  font-size: 12px; font-weight: 600; margin-bottom: 12px;
+}
+.case-card ul { list-style: none; padding: 0; }
+.case-card ul li {
+  padding: 6px 0; font-size: 14px; color: var(--text-light);
+  line-height: 1.6; position: relative; padding-left: 18px;
+}
+.case-card ul li::before {
+  content: '▸'; position: absolute; left: 0;
+  color: var(--primary); font-weight: 700;
+}
+.case-card .case-highlight {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.case-card .case-highlight-item {
+  padding: 16px; border-radius: var(--radius-sm);
+  background: var(--bg); text-align: center;
+}
+.case-card .case-highlight-item .val {
+  font-size: 24px; font-weight: 800; color: var(--primary);
+  line-height: 1;
+}
+.case-card .case-highlight-item .lbl {
+  font-size: 12px; color: var(--text-light); margin-top: 4px;
+}
+.case-card .case-img {
+  border-radius: var(--radius-sm); overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg); min-height: 240px;
+}
+.case-card .case-img img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ===== Partners ===== */
+.partners-grid {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;
+  align-items: center;
+}
+.partner-logo {
+  height: 50px; opacity: 0.5; transition: var(--transition);
+  filter: grayscale(100%);
+}
+.partner-logo:hover { opacity: 1; filter: grayscale(0%); }
+
+/* ===== Locations ===== */
+.locations-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+.location-card {
+  padding: 32px; border-radius: var(--radius);
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  transition: var(--transition);
+}
+.location-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-4px); }
+.location-card .loc-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: var(--gradient-main); display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+}
+.location-card .loc-icon svg { width: 24px; height: 24px; fill: var(--white); }
+.location-card h4 { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.location-card .loc-sub {
+  font-size: 13px; color: var(--primary-light); margin-bottom: 12px;
+}
+.location-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+/* ===== Footer ===== */
+.footer {
+  background: var(--dark-2); padding: 40px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+.footer p { font-size: 13px; color: rgba(255,255,255,0.4); }
+
+/* ===== Responsive ===== */
+@media (max-width: 992px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .case-card { grid-template-columns: 1fr; }
+  .timeline-item .timeline-content { width: calc(50% - 30px); }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; position: absolute; top: 70px; left: 0; right: 0;
+    background: rgba(11,22,40,0.98); flex-direction: column; padding: 20px;
+    gap: 4px; }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: flex; }
+  .hero-stats { gap: 30px; }
+  .about-features { grid-template-columns: 1fr; }
+  .timeline::before { left: 20px; }
+  .timeline-item, .timeline-item:nth-child(odd) { flex-direction: row; }
+  .timeline-item .timeline-content { width: calc(100% - 50px); margin-left: 50px; }
+  .timeline-dot { left: 20px; }
+  .sectors-grid { grid-template-columns: 1fr 1fr; }
+  .team-stats-grid { grid-template-columns: 1fr 1fr; }
+  .section { padding: 60px 0; }
+}
+
+@media (max-width: 480px) {
+  .sectors-grid { grid-template-columns: 1fr; }
+  .hero-stats { flex-direction: column; gap: 20px; }
+  .hero-stat { display: flex; align-items: center; gap: 12px; text-align: left; }
+}
+
+/* ===== Carousel ===== */
+.carousel { position: relative; overflow: hidden; user-select: none; min-height: 240px; background: var(--bg); }
+.carousel-inner { display: flex; height: 100%; transition: transform 0.5s ease; }
+.carousel-inner .carousel-slide { min-width: 100%; height: 100%; }
+.carousel-inner .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.carousel-dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 2; }
+.carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: var(--transition); border: none; padding: 0; }
+.carousel-dot.active { background: var(--white); box-shadow: 0 0 6px rgba(0,0,0,0.3); }
+</style>
+</head>
+<body>
+
+<!-- ===== Navigation ===== -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="logo.png" alt="宏斯特机电">
+    <span>宏斯特机电</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about" class="active">公司介绍</a></li>
+    <li><a href="#business">核心业务</a></li>
+    <li><a href="#quality">加工品质</a></li>
+    <li><a href="#cases">应用案例</a></li>
+    <li><a href="#partners">合作伙伴</a></li>
+    <li><a href="#contact">联系我们</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-particles"></div>
+  <div class="hero-circuit"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ 精密智造 · 非标自动化专家</div>
+    <h1 class="hero-title">苏州工业园区宏斯特机电</h1>
+    <p class="hero-title-en">Suzhou Industrial Park HONEST M&E Co., Ltd.</p>
+    <p class="hero-sub">专注于非标自动化设备与精密部品研发制造<br>以匠心致敬品质，以创新驱动未来</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num"><span class="counter" data-target="53">0</span>+</div>
+        <div class="hero-stat-label">专业团队</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num"><span class="counter" data-target="70">0</span>+</div>
+        <div class="hero-stat-label">技术专利</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num"><span class="counter" data-target="10">0</span>+</div>
+        <div class="hero-stat-label">行业深耕(年)</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>向下探索</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- ===== About Section ===== -->
+<section class="section white-bg" id="about">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">ABOUT</div>
+      <h2 class="section-title">公司介绍</h2>
+      <p class="section-desc">成立于2014年，立足苏州工业园区，面向全球提供精密制造与自动化解决方案</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <h3>匠心十年 · 智造未来</h3>
+        <p>苏州工业园区宏斯特机电有限公司成立于2014年3月，总部位于苏州工业园区创投工业坊，拥有苏州7000平米现代化生产基地，并在南京、盐城设立全资子公司。公司专注于非标自动化设备与精密部品研发制造，客户群体遍布海内外。</p>
+        <p>作为国家高新技术企业，公司始终坚持以技术创新为核心驱动，通过ISO9001质量管理体系认证，累计获得发明专利4+项、实用新型专利66+项，致力于为锂电、电机、汽车、家电等行业提供全方位智能制造解决方案。</p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+            高新技术企业
+          </div>
+          <div class="about-feature">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+            ISO9001认证
+          </div>
+          <div class="about-feature">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+            专精特新企业
+          </div>
+          <div class="about-feature">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+            江苏民营科技企业
+          </div>
+        </div>
+      </div>
+      <div class="about-image" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); padding: 40px; color: white; display: flex; flex-direction: column; justify-content: center; min-height: 400px;">
+        <div style="font-size: 48px; font-weight: 800; line-height: 1.2; margin-bottom: 20px;">
+          以匠心<br>致品质
+        </div>
+        <p style="font-size: 15px; opacity: 0.8; line-height: 1.8;">
+          从原材料到成品，全程品控无缝衔接<br>
+          确保零漏检、不良品零流出
+        </p>
+        <div style="margin-top: 30px; display: flex; gap: 30px;">
+          <div><strong style="font-size: 28px;">53</strong><span style="opacity:0.6;font-size:13px;display:block;">现有雇员</span></div>
+          <div><strong style="font-size: 28px;">30</strong><span style="opacity:0.6;font-size:13px;display:block;">技术人员</span></div>
+          <div><strong style="font-size: 28px;">50%+</strong><span style="opacity:0.6;font-size:13px;display:block;">技术占比</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div style="margin-top: 80px;">
+      <h3 style="text-align: center; font-size: 22px; font-weight: 700; color: var(--dark); margin-bottom: 40px;">发展历程</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content"><div class="timeline-year">2014</div><div class="timeline-text">3月公司成立，扎根苏州工业园区</div></div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content"><div class="timeline-year">2017</div><div class="timeline-text">取得ISO9001体系认证及高新技术企业认证</div></div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content"><div class="timeline-year">2018</div><div class="timeline-text">南京工厂建立，投入研发MCT领域</div></div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content"><div class="timeline-year">2020</div><div class="timeline-text">盐城工厂建立，取得SK项目合作</div></div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content"><div class="timeline-year">2022</div><div class="timeline-text">苏州新工厂搬迁，ERP系统导入</div></div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content"><div class="timeline-year" style="color: var(--accent);">2025</div><div class="timeline-text">期待与您合作共赢，共创未来</div></div>
+          <div class="timeline-dot" style="background: var(--accent); box-shadow: 0 0 0 2px var(--accent);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Core Business ===== -->
+<section class="section" id="business" style="background: var(--bg);">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">CORE BUSINESS</div>
+      <h2 class="section-title">核心业务</h2>
+      <p class="section-desc">深耕五大行业领域，提供精密部件、非标设备及自动化产线整体解决方案</p>
+    </div>
+    <div class="sectors-grid">
+      <a href="#case-battery" class="sector-card">
+        <div class="sector-icon">
+          <svg viewBox="0 0 24 24"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+        </div>
+        <h4>锂电行业</h4>
+        <p>锂电池自动化线体改造升级、精密部件加工、非标单机设备</p>
+        <span class="sector-link">查看案例</span>
+      </a>
+      <a href="#case-motor" class="sector-card">
+        <div class="sector-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>
+        </div>
+        <h4>电机马达</h4>
+        <p>扁线电机工装治具、自动化线体、精密刀具及模具</p>
+        <span class="sector-link">查看案例</span>
+      </a>
+      <a href="#case-metal" class="sector-card">
+        <div class="sector-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 7.81c0-.45-.18-.86-.47-1.17l-4.17-4.17c-.3-.3-.72-.47-1.17-.47H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7.81zM6 19V5h7v5h5v9H6z"/></svg>
+        </div>
+        <h4>金属加工</h4>
+        <p>液压/气动夹具、精密部品加工、工装治具定制</p>
+        <span class="sector-link">查看案例</span>
+      </a>
+      <a href="#case-motorcycle" class="sector-card">
+        <div class="sector-icon">
+          <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+        </div>
+        <h4>汽摩配套</h4>
+        <p>液压夹具、气动夹具、自动化检测线体、发动机壳体检测</p>
+        <span class="sector-link">查看案例</span>
+      </a>
+      <a href="#case-appliance" class="sector-card">
+        <div class="sector-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+        </div>
+        <h4>白色家电</h4>
+        <p>自动化单机设备、装配线体、焊接设备、退火设备</p>
+        <span class="sector-link">查看案例</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Team & Culture ===== -->
+<section class="section white-bg">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">TEAM & CULTURE</div>
+      <h2 class="section-title">团队与企业文化</h2>
+      <p class="section-desc">专业、年轻、专注、有梦想 — 这是我们共同的标签</p>
+    </div>
+    <div class="team-grid">
+      <div>
+        <h3 style="font-size: 22px; font-weight: 700; color: var(--dark); margin-bottom: 20px;">团队架构</h3>
+        <div class="team-stats-grid">
+          <div class="team-stat-card"><div class="num">12</div><div class="label">设计团队</div></div>
+          <div class="team-stat-card"><div class="num">4</div><div class="label">电气团队</div></div>
+          <div class="team-stat-card"><div class="num">13</div><div class="label">调试·售后团队</div></div>
+          <div class="team-stat-card"><div class="num">30</div><div class="label">技术人员<br><span style="font-size:11px;color:var(--text-light);">(占比50%+)</span></div></div>
+        </div>
+        <p style="font-size: 14px; color: var(--text-light); margin-top: 20px; line-height: 1.8;">
+          15年以上行业经验2人 · 8年以上4人 · 5年以上2人<br>
+          熟练西门子、三菱、欧姆龙等品牌编程能力<br>
+          专注于产品交付确保及客户需求及时应对
+        </p>
+      </div>
+      <div>
+        <h3 style="font-size: 22px; font-weight: 700; color: var(--dark); margin-bottom: 20px;">企业文化</h3>
+        <div class="team-values">
+          <div class="team-value" style="border-left-color: var(--primary);">
+            <h5>核心价值观</h5>
+            <p>坚持一个方向，实现团队协作，共享共担</p>
+          </div>
+          <div class="team-value" style="border-left-color: var(--accent);">
+            <h5>管理信条</h5>
+            <p>问题驱动，创新求变，允许试错</p>
+          </div>
+          <div class="team-value" style="border-left-color: var(--primary-light);">
+            <h5>经营理念</h5>
+            <p>与客户同在，从顾客的角度来思考问题</p>
+          </div>
+          <div class="team-value" style="border-left-color: var(--accent-gold);">
+            <h5>服务理念</h5>
+            <p>与客户保持最紧密的关系，为满足需求而全力以赴</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Certifications ===== -->
+<section class="section dark-bg">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">CERTIFICATIONS</div>
+      <h2 class="section-title">资质荣誉</h2>
+      <p class="section-desc">多项权威认证与自主知识产权，实力见证品质</p>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg></div>
+        <h5>高新技术企业</h5>
+        <p>苏州公司 · 南京公司</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+        <h5>ISO9001认证</h5>
+        <p>质量管理体系认证</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon"><svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2zm0-6h2v4h-2z"/></svg></div>
+        <h5>专精特新</h5>
+        <p>中小企业认定</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+        <h5>发明专利 4+</h5>
+        <p>实用新型专利 66+</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+        <h5>AAA级信用企业</h5>
+        <p>南京公司 · 盐城公司</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon"><svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2zm0-6h2v4h-2z"/></svg></div>
+        <h5>科技型中小企业</h5>
+        <p>江苏民营科技企业</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Machining & Quality ===== -->
+<section class="section white-bg" id="quality">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">MACHINING & QUALITY</div>
+      <h2 class="section-title">加工及品质</h2>
+      <p class="section-desc">配备先进加工设备与精密检测仪器，微米级精度保障</p>
+    </div>
+    <div class="equip-intro">
+      <p>车间配备恒温系统，确保稳定加工环境。配备高精慢丝、磨床、电火花、加工中心等设备，精度可达微米级(μm)。配合专业团队及三坐标等品控检测设备，可高效完成各类复杂精密零件加工，为自动化设备创造最有力条件。</p>
+    </div>
+    <div class="equip-table-wrap">
+      <table class="equip-table">
+        <thead>
+          <tr><th>设备名称</th><th>品牌</th><th>数量</th><th>精度</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CNC加工中心 1300×600</td><td>韩国 · 斗山</td><td>1</td><td>±0.005MM</td></tr>
+          <tr><td>CNC加工中心 1000×500</td><td>韩国 · 斗山</td><td>1</td><td>±0.005MM</td></tr>
+          <tr><td>CNC加工中心 800×500</td><td>韩国 · 斗山</td><td>4</td><td>±0.005MM</td></tr>
+          <tr><td>CNC加工中心 1050</td><td>台湾 · 晁群</td><td>1</td><td>±0.005MM</td></tr>
+          <tr><td>CNC加工中心 850</td><td>台湾 · 晁群</td><td>1</td><td>±0.005MM</td></tr>
+          <tr><td>CNC加工中心 740</td><td>台湾 · 晁群</td><td>2</td><td>±0.005MM</td></tr>
+          <tr><td>精密平面磨床(CGM-1050SHD)</td><td>韩国 · 昌汉</td><td>1</td><td>±0.005MM</td></tr>
+          <tr><td>精密平面磨床(CGM-850SHD)</td><td>韩国 · 昌汉</td><td>2</td><td>±0.005MM</td></tr>
+          <tr><td>精密平面磨床(618)</td><td>台湾 · 建德</td><td>3</td><td>±0.005MM</td></tr>
+          <tr><td>超精密放电线切割机(M75B)</td><td>日本 · 西部</td><td>1</td><td>±0.003MM</td></tr>
+          <tr><td>超精密放电线切割机(M50B)</td><td>日本 · 西部</td><td>1</td><td>±0.003MM</td></tr>
+          <tr><td>全数控镜面电火花成型机</td><td>中国 · 汉奇</td><td>1</td><td>-</td></tr>
+          <tr><td>数控细孔放电机</td><td>中国 · 嘉升</td><td>1</td><td>-</td></tr>
+          <tr><td>旭正铣床</td><td>台湾 · 旭正</td><td>2</td><td>±0.02MM</td></tr>
+          <tr><td>车床(广州三环G6132)</td><td>中国 · 三环</td><td>1</td><td>±0.01MM</td></tr>
+          <tr style="background: rgba(21,127,255,0.04);"><td><strong>合计</strong></td><td>-</td><td><strong>26台</strong></td><td>-</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Workshop Gallery -->
+    <div style="margin-top: 40px;">
+      <h3 style="text-align: center; font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 30px;">车间及设备实景</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); background: var(--white); transition: var(--transition);">
+          <img src="CNC加工车间.jpg" alt="CNC加工车间" style="width:100%;height:180px;object-fit:cover;display:block;">
+          <div style="padding:10px;text-align:center;font-size:13px;font-weight:600;color:var(--text);">CNC加工车间</div>
+        </div>
+        <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); background: var(--white); transition: var(--transition);">
+          <img src="CNC设备（斗山）.png" alt="CNC设备（斗山）" style="width:100%;height:180px;object-fit:cover;display:block;">
+          <div style="padding:10px;text-align:center;font-size:13px;font-weight:600;color:var(--text);">CNC设备（斗山）</div>
+        </div>
+        <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); background: var(--white); transition: var(--transition);">
+          <img src="磨床车间.jpg" alt="磨床车间" style="width:100%;height:180px;object-fit:cover;display:block;">
+          <div style="padding:10px;text-align:center;font-size:13px;font-weight:600;color:var(--text);">精密磨床车间</div>
+        </div>
+        <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); background: var(--white); transition: var(--transition);">
+          <img src="线切割车间.png" alt="线切割车间" style="width:100%;height:180px;object-fit:cover;display:block;">
+          <div style="padding:10px;text-align:center;font-size:13px;font-weight:600;color:var(--text);">线切割车间</div>
+        </div>
+        <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); background: var(--white); transition: var(--transition);">
+          <img src="QA检查间.png" alt="QA检查间" style="width:100%;height:180px;object-fit:cover;display:block;">
+          <div style="padding:10px;text-align:center;font-size:13px;font-weight:600;color:var(--text);">QA检查间</div>
+        </div>
+        <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); background: var(--white); transition: var(--transition);">
+          <img src="QA三坐标检查间.png" alt="QA三坐标检查间" style="width:100%;height:180px;object-fit:cover;display:block;">
+          <div style="padding:10px;text-align:center;font-size:13px;font-weight:600;color:var(--text);">QA三坐标检查间</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Cases ===== -->
+<section class="section" id="cases" style="background: var(--bg);">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">INDUSTRY USE CASES</div>
+      <h2 class="section-title">应用案例</h2>
+      <p class="section-desc">覆盖锂电、电机、汽摩、家电四大行业，丰富的项目实践经验</p>
+    </div>
+
+    <div class="cases-nav">
+      <button class="cases-nav-btn active" data-case="case-battery">锂电行业</button>
+      <button class="cases-nav-btn" data-case="case-motor">电机马达</button>
+      <button class="cases-nav-btn" data-case="case-motorcycle">汽摩行业</button>
+      <button class="cases-nav-btn" data-case="case-appliance">白色家电</button>
+    </div>
+
+    <!-- Battery -->
+    <div class="case-category active" id="case-battery">
+      <div class="case-card">
+        <div>
+          <span class="case-label">线体改造升级</span>
+          <h3>极耳焊接改造</h3>
+          <ul>
+            <li><strong>客户背景：</strong>江西某知名锂电制造商</li>
+            <li><strong>改造目的：</strong>效率提升 + 功能增加</li>
+            <li><strong>项目痛点：</strong>客户生产电芯容量扩大，需要焊接更厚极耳、更多层极片；因空间受限，市场标准焊接设备无法直接使用</li>
+            <li><strong>优化方案：</strong>重新设计焊接机构(涉及伺服、气缸、导向、稳压等元器件)</li>
+          </ul>
+          <div class="case-highlight" style="margin-top: 16px;">
+            <div class="case-highlight-item">
+              <div class="val">3×</div>
+              <div class="lbl">焊接能力提升</div>
+            </div>
+            <div class="case-highlight-item">
+              <div class="val">✓</div>
+              <div class="lbl">更厚极耳/更多层极片焊接</div>
+            </div>
+          </div>
+        </div>
+        <div class="case-img">
+          <img src="极耳焊接改造.png" alt="锂电极耳焊接改造" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div>
+          <span class="case-label">线体改造升级</span>
+          <h3>贴胶尺寸检测</h3>
+          <ul>
+            <li><strong>客户背景：</strong>江西某知名锂电制造商</li>
+            <li><strong>改造目的：</strong>效率提升 + 功能增加</li>
+            <li><strong>项目痛点：</strong>原有设备只能检测一个胶带，客户新产品要求额外增加一个极耳检测</li>
+            <li><strong>优化方案：</strong>优化PLC及视觉程序，更换及追加硬件(光源、相机、镜头)</li>
+          </ul>
+          <div class="case-highlight" style="margin-top: 16px;">
+            <div class="case-highlight-item">
+              <div class="val">50%</div>
+              <div class="lbl">产出效率提高</div>
+            </div>
+            <div class="case-highlight-item">
+              <div class="val">0.03mm</div>
+              <div class="lbl">检测精度</div>
+            </div>
+          </div>
+        </div>
+        <div class="case-img">
+          <img src="贴胶尺寸检测.png" alt="贴胶视觉检测系统" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div>
+          <span class="case-label">线体改造升级</span>
+          <h3>贴胶机构改造</h3>
+          <ul>
+            <li><strong>客户背景：</strong>江西某知名锂电制造商</li>
+            <li><strong>改造目的：</strong>效率提升 + 功能增加</li>
+            <li><strong>项目痛点：</strong>原有设备贴胶带"长度/宽度/数量"受限；迭代新产品需求"更长/更宽/更多"胶带贴附</li>
+            <li><strong>优化方案：</strong>重新设计贴胶机构</li>
+          </ul>
+          <div class="case-highlight" style="margin-top: 16px;">
+            <div class="case-highlight-item">
+              <div class="val">✓</div>
+              <div class="lbl">双极耳稳定贴附</div>
+            </div>
+            <div class="case-highlight-item">
+              <div class="val">✓</div>
+              <div class="lbl">多种类胶带兼容</div>
+            </div>
+          </div>
+        </div>
+        <div class="case-img">
+          <img src="贴胶机构改造.png" alt="贴胶机构再设计" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div>
+          <span class="case-label">换型开发</span>
+          <h3>软包电池换型开发</h3>
+          <ul>
+            <li><strong>客户背景：</strong>世界500强锂电制造商</li>
+            <li><strong>项目痛点：</strong>进口设备及供应商成本高，交付周期长</li>
+            <li><strong>项目内容：</strong>对客户线体、产品测绘进行3D复原，制定整体换型方案（涉及硬件、程序、安装调试、CPK调整）</li>
+          </ul>
+          <div class="case-highlight" style="margin-top: 16px;">
+            <div class="case-highlight-item">
+              <div class="val">40%</div>
+              <div class="lbl">成本降低+交期缩短</div>
+            </div>
+            <div class="case-highlight-item">
+              <div class="val">✓</div>
+              <div class="lbl">进口同性能替代</div>
+            </div>
+          </div>
+        </div>
+        <div class="case-img">
+          <img src="软包电池换型开发.png" alt="软包电池换型方案" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div>
+          <span class="case-label">自动化单机设备</span>
+          <h3>自动检测包装机</h3>
+          <ul>
+            <li><strong>客户背景：</strong>世界500强某韩资锂电制造商(盐城地区)</li>
+            <li><strong>设备类别：</strong>检测、包装类</li>
+            <li><strong>设备需求：</strong>软包电池检测、包装</li>
+          </ul>
+          <div class="case-highlight" style="margin-top: 16px;">
+            <div class="case-highlight-item">
+              <div class="val">✓</div>
+              <div class="lbl">外形尺寸自动检测区分</div>
+            </div>
+            <div class="case-highlight-item">
+              <div class="val">✓</div>
+              <div class="lbl">MES系统交互</div>
+            </div>
+          </div>
+        </div>
+        <div class="case-img">
+          <img src="自动检测包装机.png" alt="自动检测包装机" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div>
+          <span class="case-label">精密部件</span>
+          <h3>锂电精密切刀与封口部件</h3>
+          <ul>
+            <li><strong>产品类别：</strong>切刀类（PKG切刀/Folding切刀/Notching切刀）、封口类（Heating封口/PKG封口/整形切刀）</li>
+            <li><strong>产品用途：</strong>电极、分离膜、铝箔切断；软包电池PKG/化成工段封口</li>
+          </ul>
+          <div class="case-highlight" style="margin-top: 16px;">
+            <div class="case-highlight-item">
+              <div class="val">Ra0.2</div>
+              <div class="lbl">表面粗糙度(镜面)</div>
+            </div>
+            <div class="case-highlight-item">
+              <div class="val">5μm</div>
+              <div class="lbl">平面度/平行度</div>
+            </div>
+          </div>
+        </div>
+        <div class="case-img">
+          <img src="锂电池领域-精密切刀.png" alt="精密切刀 · 封口部件" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Motor -->
+    <div class="case-category" id="case-motor">
+      <div class="case-card">
+        <div>
+          <span class="case-label">产品工装</span>
+          <h3>马达圆线嵌线机工装</h3>
+          <ul>
+            <li><strong>客户背景：</strong>世界500强某韩资新能源制造商(南京地区)</li>
+            <li><strong>项目背景：</strong>马达绕线工段用</li>
+            <li><strong>产品优势：</strong>进口同性能替代，采购成本降低，交货周期缩短2周+，可按客户要求新制及维修</li>
+          </ul>
+        </div>
+        <div class="case-img">
+          <img src="马达圆线嵌线机工装.png" alt="马达圆线嵌线机工装" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div>
+          <span class="case-label">产品工装</span>
+          <h3>马达扁线整列机工装</h3>
+          <ul>
+            <li><strong>客户背景：</strong>世界500强某韩资新能源制造商(南京地区)</li>
+            <li><strong>项目背景：</strong>马达绕线工段用</li>
+            <li><strong>产品优势：</strong>进口同性能替代，采购成本降低，交货周期缩短2周+</li>
+          </ul>
+        </div>
+        <div class="case-img">
+          <img src="马达扁线整列机工装.png" alt="马达扁线整列机工装" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div>
+          <span class="case-label">自动化线体设备</span>
+          <h3>Forming成型机 — 扁线电机线圈成型</h3>
+          <ul>
+            <li><strong>客户背景：</strong>世界500强某韩资新能源制造商(南京地区)</li>
+            <li><strong>设备用途：</strong>扁线电机线圈成型</li>
+            <li><strong>设备优势：</strong>速度可达1.5s/1Pcs，行程任意调整含线长检测；线截面通用性强，长度任意定制；2D/3D成型一体模具；校直、去皮一体</li>
+          </ul>
+          <div class="case-highlight" style="margin-top: 16px;">
+            <div class="case-highlight-item">
+              <div class="val">1.5s</div>
+              <div class="lbl">单件成型速度</div>
+            </div>
+            <div class="case-highlight-item">
+              <div class="val">✓</div>
+              <div class="lbl">2D/3D成型一体</div>
+            </div>
+          </div>
+        </div>
+        <div class="case-img">
+          <img src="Forming成型机-扁线成型机.png" alt="Forming成型机" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div>
+          <span class="case-label">精密部件</span>
+          <h3>电机刀具与模具</h3>
+          <ul>
+            <li><strong>产品类别：</strong>刀具类（CNC切割刀/修整刀/修整刀盘/绝缘纸切刀/Forming切割刀）、模具类（脱皮模具、折弯模具）</li>
+            <li><strong>产品用途：</strong>扁线电机线成型、修整、切平；扁线电机线成型、折弯</li>
+            <li><strong>产品要求：</strong>表面粗糙度Ra0.2(镜面)、平面度5μm、平行度5μm、寿命提高30%</li>
+          </ul>
+        </div>
+        <div class="case-img carousel" id="carousel-motor-tools">
+          <div class="carousel-inner">
+            <div class="carousel-slide"><img src="电机刀具与模具-1.png" alt="电机刀具与模具"></div>
+            <div class="carousel-slide"><img src="电机刀具与模具-2.png" alt="电机刀具与模具"></div>
+            <div class="carousel-slide"><img src="电机刀具与模具-3.png" alt="电机刀具与模具"></div>
+            <div class="carousel-slide"><img src="电机刀具与模具-4.png" alt="电机刀具与模具"></div>
+            <div class="carousel-slide"><img src="电机刀具与模具-5.png" alt="电机刀具与模具"></div>
+            <div class="carousel-slide"><img src="电机刀具与模具-6.png" alt="电机刀具与模具"></div>
+          </div>
+          <div class="carousel-dots">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Motorcycle/Auto -->
+    <div class="case-category" id="case-motorcycle">
+      <div class="case-card">
+        <div>
+          <span class="case-label">工装夹具</span>
+          <h3>液压夹具 — 发动机油泵壳体精加工</h3>
+          <ul>
+            <li><strong>客户背景：</strong>知名韩资汽车零部件供应商(盐城地区)</li>
+            <li><strong>产品类别：</strong>发动机油泵壳体精加工</li>
+            <li><strong>压力范围：</strong>0~300KG</li>
+            <li><strong>产品优势：</strong>精确定位与重复性，极高的装夹效率和自动化程度；进口替代，成本低，交期短；采用暗管形式，节省空间</li>
+          </ul>
+        </div>
+        <div class="case-img">
+          <img src="液压夹具-发动机油泵壳体精加工-1.jpg" alt="液压夹具" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div>
+          <span class="case-label">夹具工装</span>
+          <h3>液压夹具 — 汽车转向关节精加工</h3>
+          <ul>
+            <li><strong>客户背景：</strong>知名韩资汽车零部件制造商(无锡地区)</li>
+            <li><strong>压力范围：</strong>0~300KG</li>
+            <li><strong>产品优势：</strong>稳定性高、满足高切削力加工工况，生产效率提升；进口替代，成本低，交期短</li>
+          </ul>
+        </div>
+        <div class="case-img">
+          <img src="液压夹具-汽车转向关节精加工-1.png" alt="转向关节夹具" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div>
+          <span class="case-label">夹具工装</span>
+          <h3>液压夹具 — 汽车刹车卡钳精加工</h3>
+          <ul>
+            <li><strong>客户背景：</strong>知名韩资汽车零部件供应商</li>
+            <li><strong>压力范围：</strong>0~300KG</li>
+            <li><strong>产品优势：</strong>稳定性高、满足高切削力加工工况；客制化需求定制；采用暗管形式，节省空间</li>
+          </ul>
+        </div>
+        <div class="case-img">
+          <img src="液压夹具-汽车刹车卡钳精加工-1.png" alt="刹车卡钳夹具" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div>
+          <span class="case-label">夹具工装</span>
+          <h3>气动夹具 — 电磁阀阀体精加工</h3>
+          <ul>
+            <li><strong>客户背景：</strong>世界自动化50强自动化气动制造商(济南地区)</li>
+            <li><strong>产品优势：</strong>稳定性高、满足高切削力加工工况，实现产品生产效率提升；进口替代，成本低，交期短；客制化需求定制(交钥匙项目)</li>
+          </ul>
+        </div>
+        <div class="case-img">
+          <img src="液压夹具-电磁阀阀体精加工-1.png" alt="气动夹具" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div>
+          <span class="case-label">自动化线体设备</span>
+          <h3>壳体外观缺陷检测及下料</h3>
+          <ul>
+            <li><strong>客户背景：</strong>知名中日合资摩托车制造商(苏州地区)</li>
+            <li><strong>项目痛点：</strong>人工检测存在漏失、效率低</li>
+            <li><strong>设备用途：</strong>发动机壳体外观检测；自动区分NG/OK壳体进行下料码垛</li>
+          </ul>
+          <div class="case-highlight" style="margin-top: 16px;">
+            <div class="case-highlight-item">
+              <div class="val">98.8%</div>
+              <div class="lbl">检测良率</div>
+            </div>
+            <div class="case-highlight-item">
+              <div class="val">✓</div>
+              <div class="lbl">AI深度学习飞拍检测</div>
+            </div>
+          </div>
+        </div>
+        <div class="case-img">
+          <img src="QA检查间.png" alt="AI视觉检测线体" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Appliance -->
+    <div class="case-category" id="case-appliance">
+      <div class="case-card">
+        <div>
+          <span class="case-label">自动化装配线体</span>
+          <h3>洗衣机面板装配线体</h3>
+          <ul>
+            <li><strong>客户背景：</strong>知名韩资家电生产商(南京地区)</li>
+            <li><strong>设备类别：</strong>家电装配</li>
+            <li><strong>设备用途：</strong>清洗、点胶、玻璃装配、保压</li>
+            <li><strong>设备优势：</strong>全自动完成多个工序，节省人力5人；工装快换，适配多种规格；保压压力同步检测；等离子、底涂剂同步检测并存</li>
+          </ul>
+          <div class="case-highlight" style="margin-top: 16px;">
+            <div class="case-highlight-item">
+              <div class="val">5人</div>
+              <div class="lbl">节省人力</div>
+            </div>
+            <div class="case-highlight-item">
+              <div class="val">✓</div>
+              <div class="lbl">工装快换多种规格</div>
+            </div>
+          </div>
+        </div>
+        <div class="case-img" style="background: linear-gradient(135deg, #00B0F0, #0B57C3); color: white;">
+          <div style="text-align: center; padding: 20px;">
+            <div style="font-size: 56px; margin-bottom: 10px;">🏠</div>
+            <div style="font-size: 16px; font-weight: 600;">洗衣机面板装配线体</div>
+            <div style="font-size: 13px; opacity: 0.7; margin-top: 8px;">全自动多工序一体</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Partners ===== -->
+<section class="section white-bg" id="partners">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">PARTNERS</div>
+      <h2 class="section-title">合作伙伴</h2>
+      <p class="section-desc">与国内外知名企业保持长期紧密合作，以品质赢得信赖</p>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-logo" style="width:100px;height:50px;background:#e0e4e8; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #666; font-size: 24px; filter: none; opacity: 0.8;">LG</div>
+      <div class="partner-logo" style="width:120px;height:50px;background:#e0e4e8; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #666; font-size: 18px; filter: none; opacity: 0.8;">SK</div>
+      <div class="partner-logo" style="width:100px;height:50px;background:#e0e4e8; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #666; font-size: 16px; filter: none; opacity: 0.8;">SAMSUNG</div>
+      <div class="partner-logo" style="width:120px;height:50px;background:#e0e4e8; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #666; font-size: 20px; filter: none; opacity: 0.8;">HYUNDAI</div>
+      <div class="partner-logo" style="width:130px;height:50px;background:#e0e4e8; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #666; font-size: 14px; filter: none; opacity: 0.8;">Festo</div>
+      <div class="partner-logo" style="width:110px;height:50px;background:#e0e4e8; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #666; font-size: 14px; filter: none; opacity: 0.8;">SMC</div>
+    </div>
+    <p style="text-align: center; margin-top: 30px; font-size: 14px; color: var(--text-light);">* 以上为部分合作伙伴展示，排名不分先后</p>
+  </div>
+</section>
+
+<!-- ===== Contact ===== -->
+<section class="section dark-bg" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">CONTACT</div>
+      <h2 class="section-title">联系我们</h2>
+      <p class="section-desc">三地联动，就近服务，期待与您的合作</p>
+    </div>
+    <div class="locations-grid">
+      <div class="location-card">
+        <div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+        <h4>苏州总部</h4>
+        <div class="loc-sub">苏州工业园区宏斯特机电有限公司</div>
+        <p>江苏省 · 苏州市 · 工业园区 · 创投工业坊1区1号楼</p>
+            <p style="margin-top:8px;font-size:14px;color:var(--primary-light);"><strong>联系人：</strong>孙林 &nbsp; <strong>电话：</strong>189****0435</p>
+      </div>
+      <div class="location-card">
+        <div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+        <h4>南京子公司</h4>
+        <div class="loc-sub">南京裕富精密机电有限公司</div>
+        <p>江苏省 · 南京市 · 栖霞区 · 兴友路35号</p>
+            <p style="margin-top:8px;font-size:14px;color:var(--primary-light);"><strong>联系人：</strong>周荣臻 &nbsp; <strong>电话：</strong>180****4580</p>
+      </div>
+      <div class="location-card">
+        <div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+        <h4>盐城子公司</h4>
+        <div class="loc-sub">盐城裕富精密机电有限公司</div>
+        <p>江苏省 · 盐城市 · 亭湖区 · 联泽工业园2厂房</p>
+            <p style="margin-top:8px;font-size:14px;color:var(--primary-light);"><strong>联系人：</strong>孙强 &nbsp; <strong>电话：</strong>152****7355</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="container">
+    <p>© 2025 苏州工业园区宏斯特机电有限公司 All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script>
+// ===== Navbar scroll effect =====
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 80);
+});
+
+// ===== Mobile nav toggle =====
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// Close nav on link click (mobile)
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+// ===== Case category tabs =====
+const caseBtns = document.querySelectorAll('.cases-nav-btn');
+const caseCategories = document.querySelectorAll('.case-category');
+
+caseBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    caseBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    caseCategories.forEach(c => c.classList.remove('active'));
+    document.getElementById(btn.dataset.case).classList.add('active');
+  });
+});
+
+// ===== Active nav link highlight =====
+const sections = document.querySelectorAll('section[id], .section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const top = section.offsetTop - 120;
+    if (window.scrollY >= top) current = section.getAttribute('id');
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+});
+
+// ===== Counter animation =====
+const counters = document.querySelectorAll('.counter');
+const speed = 200;
+
+const animateCounter = (counter) => {
+  const target = +counter.dataset.target;
+  const increment = target / speed;
+  let current = 0;
+
+  const update = () => {
+    current += increment;
+    if (current < target) {
+      counter.textContent = Math.ceil(current);
+      requestAnimationFrame(update);
+    } else {
+      counter.textContent = target;
+    }
+  };
+  update();
+};
+
+// Intersection Observer for counters
+const observerOptions = { threshold: 0.5 };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+counters.forEach(c => observer.observe(c));
+
+// ===== Carousel auto-play =====
+function initCarousel(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const inner = el.querySelector('.carousel-inner');
+  const dots = el.querySelectorAll('.carousel-dot');
+  let idx = 0, timer;
+
+  function goTo(i) {
+    idx = i;
+    inner.style.transform = 'translateX(-' + (idx * 100) + '%)';
+    dots.forEach(function(d, j) { d.classList.toggle('active', j === idx); });
+  }
+
+  function next() { goTo((idx + 1) % dots.length); }
+  function start() { timer = setInterval(next, 2500); }
+  function stop() { clearInterval(timer); }
+
+  el.addEventListener('mouseenter', stop);
+  el.addEventListener('mouseleave', start);
+  dots.forEach(function(d, i) {
+    d.addEventListener('click', function() { stop(); goTo(i); start(); });
+  });
+  start();
+}
+
+initCarousel('carousel-motor-tools');
+</script>
+
+</body>
+</html>
