@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026年中国桨板赛事地图</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<script src="https://cdn.bootcdn.net/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0b1a2e; color: #fff; }
+.header {
+  background: linear-gradient(135deg, #0b1a2e 0%, #1a3a5c 50%, #0d2137 100%);
+  padding: 30px 20px 20px; text-align: center;
+  border-bottom: 3px solid #00d4ff;
+}
+.header h1 { font-size: 28px; font-weight: 800; letter-spacing: 4px; background: linear-gradient(90deg,#00d4ff,#00ff88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.header p { color: #8ab4d6; font-size: 14px; margin-top: 6px; letter-spacing: 2px; }
+.header .count { display: inline-block; margin-top: 10px; background: rgba(0,212,255,0.15); border: 1px solid rgba(0,212,255,0.3); border-radius: 20px; padding: 4px 18px; font-size: 13px; color: #00d4ff; }
+#map { width: 100%; height: 75vh; background: #0b1a2e; }
+.info-panel {
+  background: linear-gradient(180deg, #0d2137, #0b1a2e);
+  padding: 20px;
+  border-top: 2px solid rgba(0,212,255,0.15);
+}
+.info-panel h2 { font-size: 18px; color: #00d4ff; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.info-panel h2::before { content: '🏄'; font-size: 20px; }
+.race-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+.race-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 14px 16px;
+  transition: all 0.2s;
+}
+.race-card:hover { background: rgba(0,212,255,0.06); border-color: rgba(0,212,255,0.25); transform: translateY(-1px); }
+.race-card .tag {
+  display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  padding: 2px 8px; border-radius: 4px; margin-bottom: 6px;
+}
+.tag-international { background: #ff6b35; color: #fff; }
+.tag-national { background: #00b4d8; color: #fff; }
+.tag-local { background: #2d6a4f; color: #fff; }
+.race-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.race-card .location { font-size: 12px; color: #8ab4d6; margin-bottom: 6px; }
+.race-card .location::before { content: '📍 '; }
+.race-card .date { font-size: 12px; color: #ffd166; margin-bottom: 6px; }
+.race-card .date::before { content: '📅 '; }
+.race-card .events { font-size: 12px; color: #aaa; line-height: 1.5; }
+.race-card .events::before { content: '🏁 '; }
+.race-card .link { display: inline-block; margin-top: 8px; font-size: 11px; color: #00d4ff; text-decoration: none; border-bottom: 1px dotted rgba(0,212,255,0.3); }
+.race-card .link:hover { color: #00ff88; border-bottom-color: #00ff88; }
+.leaflet-popup-content-wrapper { background: #0d2137 !important; color: #fff !important; border-radius: 10px !important; border: 1px solid rgba(0,212,255,0.2); }
+.leaflet-popup-tip { background: #0d2137 !important; }
+.leaflet-popup-content { margin: 12px 16px !important; font-family: 'PingFang SC','Microsoft YaHei',sans-serif !important; }
+.popup-title { font-size: 15px; font-weight: 700; color: #00d4ff; margin-bottom: 4px; }
+.popup-detail { font-size: 12px; color: #ccc; margin: 2px 0; }
+.popup-link { display: inline-block; margin-top: 6px; font-size: 11px; color: #00ff88; }
+.custom-marker { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; border: 2px solid rgba(255,255,255,0.8); box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+.marker-intl { background: #ff6b35; }
+.marker-national { background: #00b4d8; }
+.marker-local { background: #2d6a4f; }
+.legend { position: absolute; bottom: 20px; right: 20px; background: rgba(13,33,55,0.9); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 14px; font-size: 11px; z-index: 1000; color: #ccc; }
+.legend-item { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
+.legend-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+@media (max-width: 600px) {
+  .header h1 { font-size: 20px; }
+  #map { height: 55vh; }
+  .race-grid { grid-template-columns: 1fr; }
+  .legend { bottom: 10px; right: 10px; font-size: 10px; padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🏄 2026 中国桨板赛事地图</h1>
+  <p>SUP RACE CALENDAR · 全国赛事一览</p>
+  <div class="count" id="raceCount">加载中...</div>
+</div>
+
+<div id="map"></div>
+
+<div class="info-panel">
+  <h2>全部赛事列表</h2>
+  <div class="race-grid" id="raceList"></div>
+</div>
+
+<script>
+const races = [
+  {
+    name: '绿水青山·重庆北碚大盛站', lat: 29.83, lng: 106.38,
+    date: '5月17日', city: '重庆北碚区大盛镇',
+    tag: 'national', tagLabel: '国家级',
+    events: '桨板+路跑 水陆两项赛',
+    link: 'https://cqrb.cn/contry/dy16/2026-04-24/2647508_pc.html',
+    linkLabel: '查看详情'
+  },
+  {
+    name: '楚天桨王·兴山站', lat: 31.35, lng: 110.75,
+    date: '5月16日-17日', city: '湖北宜昌兴山县',
+    tag: 'local', tagLabel: '地方联赛',
+    events: '200m直道竞速 / 6km长距离 / 龙板亲子赛',
+    link: 'http://tyj.hubei.gov.cn/bmdt/zhxx/202604/t20260417_5916547.shtml',
+    linkLabel: '竞赛通知'
+  },
+  {
+    name: '皮划艇马拉松世界杯（含桨板）', lat: 31.85, lng: 106.77,
+    date: '5月20日-24日', city: '四川巴中巴州区',
+    tag: 'international', tagLabel: '国际赛事',
+    events: '3.4km / 10km / 16km / 19km 多项',
+    link: 'https://wgtlj.cnbz.gov.cn/tslm/tyss/23914116.html',
+    linkLabel: '赛事官网'
+  },
+  {
+    name: '桨板精英联赛·云南普者黑站', lat: 24.14, lng: 104.14,
+    date: '5月（具体待定）', city: '云南丘北县普者黑',
+    tag: 'national', tagLabel: '国家级',
+    events: '长距离赛 / 技巧赛 / 龙板赛',
+    link: 'https://www.csupf.com/diving/xhgg/2026/0316/189961.html',
+    linkLabel: '体育总局公示'
+  },
+  {
+    name: '上海桨板选拔赛', lat: 31.38, lng: 121.27,
+    date: '5月10日', city: '上海嘉定安亭汽车博览公园',
+    tag: 'local', tagLabel: '地方赛',
+    events: '200m冲刺 / 3000m长距离 / 青少年组/公开组/大师组',
+    link: 'https://www.163.com/dy/article/KRJPV4NO053478CE.html',
+    linkLabel: '报名详情'
+  },
+  {
+    name: '桨板国际公开赛·陕西汉中站', lat: 33.07, lng: 107.02,
+    date: '6月9日-10日', city: '陕西汉中市',
+    tag: 'national', tagLabel: '国家级',
+    events: '长距离赛 / 技巧赛',
+    link: 'https://www.csupf.com/diving/xhgg/2026/0316/189961.html',
+    linkLabel: '体育总局公示'
+  },
+  {
+    name: '惠阳平潭龙板·桨板赛', lat: 22.78, lng: 114.47,
+    date: '6月19日-20日', city: '广东惠州惠阳区平潭',
+    tag: 'local', tagLabel: '地方赛',
+    events: '2000m长距离 / 400m技巧赛 / 4×400m龙板绕标',
+    link: 'http://www.huizhou.cn/news/newsc_counties/newsc_chd/202605/t20260510_1651322.htm',
+    linkLabel: '报名通道'
+  },
+  {
+    name: '绿水青山·云南丽江站', lat: 26.87, lng: 100.23,
+    date: '6月中下旬', city: '云南丽江市',
+    tag: 'national', tagLabel: '国家级',
+    events: '桨板+路跑 水陆两项赛',
+    link: 'https://www.csupf.com/diving/xhgg/2026/0316/189961.html',
+    linkLabel: '体育总局公示'
+  },
+  {
+    name: '楚天桨王·嘉鱼站', lat: 29.97, lng: 113.94,
+    date: '6月-7月（待定）', city: '湖北咸宁嘉鱼县',
+    tag: 'local', tagLabel: '地方联赛',
+    events: '200m直道竞速 / 长距离赛 / 龙板亲子赛',
+    link: 'http://tyj.hubei.gov.cn/bmdt/zhxx/202604/t20260417_5916547.shtml',
+    linkLabel: '竞赛通知'
+  },
+  {
+    name: '桨板精英联赛·宁夏石嘴山站', lat: 39.02, lng: 106.38,
+    date: '7月18日-19日', city: '宁夏石嘴山市',
+    tag: 'national', tagLabel: '国家级',
+    events: '长距离赛 / 技巧赛 / 龙板赛',
+    link: 'https://www.csupf.com/diving/xhgg/2026/0316/189961.html',
+    linkLabel: '体育总局公示'
+  },
+  {
+    name: '环东湖国际桨板公开赛', lat: 30.54, lng: 114.37,
+    date: '7月17日-19日', city: '武汉东湖',
+    tag: 'international', tagLabel: '国际赛事',
+    events: '长距离赛 / 技巧赛 / 龙板赛',
+    link: 'http://www.cnr.cn/hubei/tout/20260416/t20260416_527586616.shtml',
+    linkLabel: '赛事计划'
+  },
+  {
+    name: '楚天桨王·江夏站', lat: 30.36, lng: 114.32,
+    date: '7月-8月（待定）', city: '武汉江夏区',
+    tag: 'local', tagLabel: '地方联赛',
+    events: '200m直道竞速 / 长距离赛 / 龙板亲子赛',
+    link: 'http://tyj.hubei.gov.cn/bmdt/zhxx/202604/t20260417_5916547.shtml',
+    linkLabel: '竞赛通知'
+  },
+  {
+    name: '楚天桨王·仙桃站', lat: 30.36, lng: 113.44,
+    date: '8月（待定）', city: '湖北仙桃市',
+    tag: 'local', tagLabel: '地方联赛',
+    events: '200m直道竞速 / 长距离赛 / 龙板亲子赛',
+    link: 'http://tyj.hubei.gov.cn/bmdt/zhxx/202604/t20260417_5916547.shtml',
+    linkLabel: '竞赛通知'
+  },
+  {
+    name: '桨板精英联赛·陕西西安站', lat: 34.34, lng: 108.94,
+    date: '9月10日-13日', city: '陕西西安市',
+    tag: 'national', tagLabel: '国家级',
+    events: '长距离赛 / 技巧赛 / 龙板赛',
+    link: 'https://www.csupf.com/diving/xhgg/2026/0316/189961.html',
+    linkLabel: '体育总局公示'
+  },
+  {
+    name: 'ICF桨板世界杯', lat: 31.30, lng: 120.58,
+    date: '9月25日-28日', city: '江苏苏州',
+    tag: 'international', tagLabel: '国际A类',
+    events: '国际划联认证 · 精英组 / 大众组',
+    link: 'https://www.csupf.com/diving/xhgg/2026/0316/189961.html',
+    linkLabel: '体育总局公示'
+  },
+  {
+    name: '国际划联杭州超级杯（含桨板）', lat: 30.05, lng: 119.95,
+    date: '9月30日-10月3日', city: '杭州富阳水上运动中心',
+    tag: 'international', tagLabel: '国际赛事',
+    events: '桨板大众表演赛（开放300名额）· 皮划艇/激流/龙舟',
+    link: 'https://www.hi-lp.cn/tt/202604/t20260430_7359869.shtml',
+    linkLabel: '赛事详情'
+  },
+  {
+    name: '桨板精英联赛·四川青神站', lat: 29.83, lng: 103.85,
+    date: '10月1日-3日', city: '四川眉山市青神县',
+    tag: 'national', tagLabel: '国家级',
+    events: '长距离赛 / 技巧赛 / 龙板赛',
+    link: 'https://www.csupf.com/diving/xhgg/2026/0316/189961.html',
+    linkLabel: '体育总局公示'
+  },
+  {
+    name: '世界海岸赛艇锦标赛', lat: 36.07, lng: 120.38,
+    date: '10月11日-13日', city: '山东青岛',
+    tag: 'international', tagLabel: '国际赛事',
+    events: '海岸赛艇 / 沙滩冲刺',
+    link: 'https://worldrowing.com/event/2026-world-rowing-coastal-championships',
+    linkLabel: '官方报名'
+  },
+  {
+    name: '楚天桨王·总决赛（石首）', lat: 29.72, lng: 112.40,
+    date: '10月17日-18日', city: '湖北荆州石首市',
+    tag: 'local', tagLabel: '地方联赛',
+    events: '200m直道竞速 / 6km长距离 / 龙板亲子赛',
+    link: 'http://tyj.hubei.gov.cn/bmdt/zhxx/202604/t20260417_5916547.shtml',
+    linkLabel: '竞赛通知'
+  },
+  {
+    name: '桨板精英联赛·江西万安站', lat: 26.46, lng: 114.78,
+    date: '10月中下旬', city: '江西吉安市万安县',
+    tag: 'national', tagLabel: '国家级',
+    events: '长距离赛 / 技巧赛 / 龙板赛',
+    link: 'https://www.csupf.com/diving/xhgg/2026/0316/189961.html',
+    linkLabel: '体育总局公示'
+  },
+  {
+    name: '千船竞发·桨板休闲皮划艇赛', lat: 35.42, lng: 119.53,
+    date: '待定', city: '山东日照',
+    tag: 'national', tagLabel: '国家级',
+    events: '桨板 / 休闲皮划艇',
+    link: 'http://tyj.rizhao.gov.cn/art/2026/3/31/art_30690_10319978.html',
+    linkLabel: '竞赛通知'
+  },
+  {
+    name: '桨板球公开赛', lat: 35.40, lng: 119.55,
+    date: '待定', city: '山东日照',
+    tag: 'local', tagLabel: '地方赛',
+    events: '桨板球（SUP Polo）',
+    link: 'http://tyj.rizhao.gov.cn/art/2026/3/31/art_30690_10319979.html',
+    linkLabel: '竞赛通知'
+  },
+  {
+    name: '全国桨板U系列赛', lat: 36.05, lng: 120.35,
+    date: '8月-9月', city: '山东青岛',
+    tag: 'national', tagLabel: '国家级',
+    events: 'U系列桨板赛',
+    link: 'https://www.csupf.com/diving/xhgg/2026/0316/189961.html',
+    linkLabel: '体育总局公示'
+  },
+  {
+    name: '楚天桨王·点军站', lat: 30.70, lng: 111.29,
+    date: '8月-9月（待定）', city: '湖北宜昌点军区',
+    tag: 'local', tagLabel: '地方联赛',
+    events: '200m直道竞速 / 长距离赛 / 龙板亲子赛',
+    link: 'http://tyj.hubei.gov.cn/bmdt/zhxx/202604/t20260417_5916547.shtml',
+    linkLabel: '竞赛通知'
+  },
+  {
+    name: '楚天桨王·广水站', lat: 31.62, lng: 113.83,
+    date: '9月（待定）', city: '湖北随州广水市',
+    tag: 'local', tagLabel: '地方联赛',
+    events: '200m直道竞速 / 长距离赛 / 龙板亲子赛',
+    link: 'http://tyj.hubei.gov.cn/bmdt/zhxx/202604/t20260417_5916547.shtml',
+    linkLabel: '竞赛通知'
+  },
+  {
+    name: '桨动杭州·桨板系列赛', lat: 30.28, lng: 120.15,
+    date: '全年多站', city: '杭州',
+    tag: 'local', tagLabel: '地方赛',
+    events: '多站系列赛',
+    link: 'http://www.ccgp.gov.cn/cggg/dfgg/gkzb/202604/t20260430_26500162.htm',
+    linkLabel: '招标公告'
+  }
+];
+
+const tagColors = {
+  international: { bg: '#ff6b35', label: '🌍 国际赛事' },
+  national: { bg: '#00b4d8', label: '🏅 国家级' },
+  local: { bg: '#2d6a4f', label: '🏟️ 地方联赛' }
+};
+
+// Initialize map
+const map = L.map('map', {
+  center: [34.5, 108],
+  zoom: 5,
+  minZoom: 4,
+  maxBounds: [[15, 70], [55, 140]],
+  zoomControl: true
+});
+
+// 使用高德地图（国内可访问）
+const osm = L.tileLayer('https://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
+  attribution: '&copy; 高德地图',
+  maxZoom: 18,
+  opacity: 0.9,
+  subdomains: []
+});
+
+const satellite = L.tileLayer('https://webst01.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}', {
+  attribution: '&copy; 高德地图',
+  maxZoom: 18,
+  opacity: 0.9
+});
+
+osm.addTo(map);
+
+// 切换底图控件
+L.control.layers({
+  '🗺️ 地图': osm,
+  '🛰️ 卫星': satellite
+}, null, { position: 'topleft' }).addTo(map);
+
+// Add markers
+races.forEach((r, i) => {
+  const color = tagColors[r.tag]?.bg || '#666';
+  const marker = L.circleMarker([r.lat, r.lng], {
+    radius: 8,
+    fillColor: color,
+    color: '#fff',
+    weight: 2,
+    fillOpacity: 0.9
+  }).addTo(map);
+
+  const popupContent = `
+    <div class="popup-title">${r.name}</div>
+    <div class="popup-detail">📍 ${r.city}</div>
+    <div class="popup-detail">📅 ${r.date}</div>
+    <div class="popup-detail">🏁 ${r.events}</div>
+    ${r.link ? `<a class="popup-link" href="${r.link}" target="_blank">🔗 ${r.linkLabel || '详情'} →</a>` : ''}
+  `;
+  marker.bindPopup(popupContent);
+});
+
+// Legend
+const legend = L.control({ position: 'bottomright' });
+legend.onAdd = function() {
+  const div = L.DomUtil.create('div', 'legend');
+  div.innerHTML = `
+    <div style="font-weight:700;color:#fff;margin-bottom:4px;font-size:12px;">赛事级别</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#ff6b35"></span> 国际赛事</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#00b4d8"></span> 国家级</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#2d6a4f"></span> 地方联赛</div>
+  `;
+  return div;
+};
+legend.addTo(map);
+
+// Fit bounds
+const bounds = races.map(r => [r.lat, r.lng]);
+map.fitBounds(bounds, { padding: [40, 40] });
+
+// Render race list
+const grid = document.getElementById('raceList');
+races.forEach(r => {
+  const tc = tagColors[r.tag] || { bg: '#666', label: r.tagLabel };
+  const card = document.createElement('div');
+  card.className = 'race-card';
+  card.innerHTML = `
+    <span class="tag tag-${r.tag}">${tc.label}</span>
+    <h3>${r.name}</h3>
+    <div class="location">${r.city}</div>
+    <div class="date">${r.date}</div>
+    <div class="events">${r.events}</div>
+    ${r.link ? `<a class="link" href="${r.link}" target="_blank">🔗 ${r.linkLabel || '报名/详情'} →</a>` : ''}
+  `;
+  grid.appendChild(card);
+});
+
+document.getElementById('raceCount').textContent = `共 ${races.length} 场赛事`;
+</script>
+</body>
+</html>
